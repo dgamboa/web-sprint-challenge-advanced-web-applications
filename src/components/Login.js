@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   const [credentials, setCredentials] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // ****************************************************
+  // ***This code came along with the assignment*********
+  // ***I don't think it's supposed to be here***********
+  // ****************************************************
   // useEffect(()=>{
   //   axios
   //     .delete(`http://localhost:5000/api/colors/1`, {
@@ -43,6 +47,7 @@ const Login = () => {
       .then(res => {
         const token = JSON.stringify(res.data.payload);
         localStorage.setItem("token", token);
+        props.history.push("/bubble-page");
       })
       .catch(err => {
         console.log({err});
