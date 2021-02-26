@@ -20,19 +20,19 @@ In this project you will create a login page and request a token from the server
 
 ### Task 1: Project Setup
 
-* [ ] Fork and clone this repository.
-* [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-* [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-* [ ] Push commits: git push origin `<firstName-lastName>`.
-* [ ] **RUN** `npm install` to install your dependencies.
-* [ ] **RUN** `npm start` to start your application.
+* [x] Fork and clone this repository.
+* [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+* [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+* [x] Push commits: git push origin `<firstName-lastName>`.
+* [x] **RUN** `npm install` to install your dependencies.
+* [x] **RUN** `npm start` to start your application.
 
 ### Task 2: CodeGrade Setup
 
-* [ ] Open the assignment in Canvas and following along with the attached document [here.](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374).
-* [ ] Follow instructions to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>`.
-* [ ] Push your first commit: `git commit --allow-empty -m "first commit" && git push`
-* [ ] Check to see that Codegrade has accepted your git submssion.
+* [x] Open the assignment in Canvas and following along with the attached document [here.](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374).
+* [x] Follow instructions to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>`.
+* [x] Push your first commit: `git commit --allow-empty -m "first commit" && git push`
+* [x] Check to see that Codegrade has accepted your git submission.
 
 ### Task 3: Project Requirements
 
@@ -42,20 +42,20 @@ Your finished project must include all of the following requirements. **Unlike o
 
 Build a login form to authenticate your users.
 
-* [ ] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
-* [ ] Save the token to localStorage
-* [ ] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
-* [ ] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
+* [x] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
+* [x] Save the token to localStorage
+* [x] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
+* [x] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
 
 #### Consuming the API
 
-* [ ] When `BubblePages` renders, make a GET request to fetch the color data for your bubbles.
-* [ ] In `ColorList.js`, complete the `saveEdit` and `deleteColor` functions to make AJAX requests to the API to edit/delete data
-* [ ] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
+* [x] When `BubblePages` renders, make a GET request to fetch the color data for your bubbles.
+* [x] In `ColorList.js`, complete the `saveEdit` and `deleteColor` functions to make AJAX requests to the API to edit/delete data
+* [x] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
 
 #### Testing
 
-* [ ] Finish the test in `BubblePage.test.js` to test that your app is fetching the bubble data from the API
+* [x] Finish the test in `BubblePage.test.js` to test that your app is fetching the bubble data from the API
 
 **Notes:**
 * You are welcome to create additional files but **do not move or rename existing files** or folders.
@@ -72,7 +72,7 @@ When completing these goals, make sure to use a **new branch** to ensure your MV
 
 These goals may or may not be things you have learned in this module but they build on the material you just studied:
 
-* [ ] Build out another form to add a new color to your color list
+* [x] Build out another form to add a new color to your color list
 * [ ] Build a custom hook called `useApi` that you can use to make all of your API calls
 * [ ] Add more tests to give you further confidence in the code you're shipping
 
@@ -93,17 +93,24 @@ These goals may or may not be things you have learned in this module but they bu
 
 ## Submission format
 
-* [ ] Submit via Codegrade by commiting and pushing any new changes.
-* [ ] Submit a pull-request to merge <firstName-lastName> branch into main. **Please don't merge your own pull request and make sure you are on your own repo**
-* [ ] Check codegrade for automated feedback. You can see more within 
-* [ ] Check codegrade on Monday following the Sprint Challenge for reviewer feedback.
-* [ ] Any changes pushed to your <firstName-lastName> branch will resubmited to codegrade if pushed before the sprint challenge deadline. Changes after the deadline will not be reviewed.
+* [x] Submit via Codegrade by commiting and pushing any new changes.
+* [x] Submit a pull-request to merge <firstName-lastName> branch into main. **Please don't merge your own pull request and make sure you are on your own repo**
+* [x] Check codegrade for automated feedback. You can see more within 
+* [x] Check codegrade on Monday following the Sprint Challenge for reviewer feedback.
+* [x] Any changes pushed to your <firstName-lastName> branch will resubmited to codegrade if pushed before the sprint challenge deadline. Changes after the deadline will not be reviewed.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. Add your answers to the questions within `interview_answers.md` file. These will not be counted as a part of your sprint score but will be helpful for preparing you for your endorsement interview, and enhancing overall understanding.
 
 1. Explain what a token is used for.
+Tokens are used to authenticate users to a service.
 2. What steps can you take in your web apps to keep your data secure?
+We can set up private routes for restricted data and permit access only to those users that have been authenticated.
 3. Describe how web servers work.
+At a high level, web servers process HTTP requests sent through the web by clients. The server determines whether the request is valid (i.e. pointing at an existing resource and has the proper authorization if needed) and executes an action based on the predetermined response for a request of that type. The action typically involves a database operation (i.e. fetching or changing data) and a response back to the client.
 4. Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+Create: POST
+Read: GET
+Update: PUT
+Delete: DELETE
