@@ -4,7 +4,8 @@ import axios from "axios";
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const [formValues, setFormValues] = useState({});
+  const [credentials, setCredentials] = useState({});
+  const [error, setError] = useState("Hello there");
 
   useEffect(()=>{
     axios
@@ -27,10 +28,11 @@ const Login = () => {
   }, []);
 
   const handleChange = e => {
-    setFormValues({
-      ...formValues,
+    setCredentials({
+      ...credentials,
       [e.target.name]: e.target.value
     });
+    setError("");
   };
 
   const handleLogin = e => {
@@ -44,23 +46,24 @@ const Login = () => {
         Welcome to the Bubble App!
       </h1>
       <form onSubmit={handleLogin}>
-        <label>Username: 
+        <label>Username
           <input
             type="text"
             name="username"
-            value={formValues.username || ""}
+            value={credentials.username || ""}
             onChange={handleChange}
           />
         </label>
-        <label>Password: 
+        <label>Password
           <input
             type="password"
             name="password"
-            value={formValues.password || ""}
+            value={credentials.password || ""}
             onChange={handleChange}
           />
         </label>
         <button>Login</button>
+        <p style={{color:"red"}}>--{error}--</p>
       </form>
     </>
   );
@@ -70,7 +73,7 @@ export default Login;
 
 //Task List:
 //1. Build a form containing a username and password field.
-//2. Add whatever state nessiary for form functioning.
+//2. Add whatever state is necessary for form functioning.
 //3. MAKE SURE THAT FORM INPUTS INCLUDE THE LABEL TEXT "username" and "password" RESPECTIVELY.
-//4. If either the username or password is not displaied display EXACTLY the following words: Username or Password not valid.
+//4. If either the username or password is not displayed EXACTLY the following words: Username or Password not valid.
 //5. If the username / password is equal to Lambda School / i<3Lambd4, save that token to localStorage.
