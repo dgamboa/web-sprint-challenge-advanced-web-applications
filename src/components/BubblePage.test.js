@@ -1,6 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
+import { axiosWithAuth as mockAxiosWithAuth } from "../helpers/axiosWithAuth";
+import axios from "axios";
+
+jest.mock("../helpers/axiosWithAuth")
 
 const colors = [
   {
@@ -19,24 +23,25 @@ const colors = [
   }
 ]
 
-const getColorsMock = jest.fn();
+// test("Renders BubblePage without errors", () => {
+//   render(<BubblePage/>);
+// });
 
-test("Renders BubblePage without errors", () => {
-  render(<BubblePage/>);
-});
+test("Fetches data and renders the bubbles on mounting", async () => {
+  mockAxiosWithAuth.mockResolvedValueOnce({ get: "hello"})
+  
+  console.log(await mockAxiosWithAuth())
 
-test("Fetches data and renders the bubbles on mounting", () => {
-  const { rerender } = render(<BubblePage/>);
+  // jest.spyOn(mockAxiosWithAuth, "get").mockResolvedValueOnce({ data: colors });
+  // axiosWithAuth().get = jest.fn().mockResolvedValueOnce({ data: colors });
 
-  // There should be no colors on first render
-  expect(screen.queryByText(/blueviolet/i)).toBeNull();
+  // These are ok
+  render(<BubblePage />);
 
-  // Re-render component with color data
-  // rerender(<BubblePage/>);
+  // const bubble = await screen.findByText(/limegreen/i)
+  // console.log(bubble);
 
-  // Should now have colors
-
-
+  // expect(bubble).toBeInTheDocument();
 });
 
 //Task List
