@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   const [credentials, setCredentials] = useState({});
-  const [error, setError] = useState("Hello there");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(()=>{
-    axios
-      .delete(`http://localhost:5000/api/colors/1`, {
-        headers:{
-          'authorization': "ahuBHejkJJiMDhmODZhZi0zaeLTQ4ZfeaseOGZgesai1jZWYgrTA07i73Gebhu98"
-        }
-      })
-      .then(res=>{
-        axios.get(`http://localhost:5000/api/colors`, {
-          headers:{
-            'authorization': ""
-          }
-        })
-        .then(res=> {
-          console.log(res);
-        });
-        console.log(res);
-      })
-  }, []);
+  // useEffect(()=>{
+  //   axios
+  //     .delete(`http://localhost:5000/api/colors/1`, {
+  //       headers:{
+  //         'authorization': "ahuBHejkJJiMDhmODZhZi0zaeLTQ4ZfeaseOGZgesai1jZWYgrTA07i73Gebhu98"
+  //       }
+  //     })
+  //     .then(res=>{
+  //       axios.get(`http://localhost:5000/api/colors`, {
+  //         headers:{
+  //           'authorization': ""
+  //         }
+  //       })
+  //       .then(res=> {
+  //         console.log(res);
+  //       });
+  //       console.log(res);
+  //     })
+  // }, []);
 
   const handleChange = e => {
     setCredentials({
@@ -37,11 +38,21 @@ const Login = () => {
 
   const handleLogin = e => {
     e.preventDefault();
-    console.log("tried to login");
+    setIsLoading(true);
+    axios.post(`http://localhost:5000/api/login`, credentials)
+      .then(res => {
+        const token = JSON.stringify(res.data.payload);
+        localStorage.setItem("token", token);
+      })
+      .catch(err => {
+        console.log({err});
+        setError(err.response.data.error)
+      })
+      .finally(setIsLoading(false))
   };
 
   return (
-    <>
+    <div>
       <h1>
         Welcome to the Bubble App!
       </h1>
@@ -62,10 +73,14 @@ const Login = () => {
             onChange={handleChange}
           />
         </label>
-        <button>Login</button>
-        <p style={{color:"red"}}>--{error}--</p>
+        {
+          isLoading
+            ? <p>Loading...</p>
+            : <button>Login</button>
+        }
+        <p style={{color:"red"}}>{error}</p>
       </form>
-    </>
+    </div>
   );
 };
 
