@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+  const [formValues, setFormValues] = useState({});
 
   useEffect(()=>{
     axios
@@ -23,14 +24,44 @@ const Login = () => {
         });
         console.log(res);
       })
-  });
+  }, []);
+
+  const handleChange = e => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleLogin = e => {
+    e.preventDefault();
+    console.log("tried to login");
+  };
 
   return (
     <>
       <h1>
         Welcome to the Bubble App!
-        <p>Build a login page here</p>
       </h1>
+      <form onSubmit={handleLogin}>
+        <label>Username: 
+          <input
+            type="text"
+            name="username"
+            value={formValues.username || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label>Password: 
+          <input
+            type="password"
+            name="password"
+            value={formValues.password || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <button>Login</button>
+      </form>
     </>
   );
 };
