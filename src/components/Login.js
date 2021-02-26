@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Login = (props) => {
@@ -31,6 +31,12 @@ const Login = (props) => {
   //       console.log(res);
   //     })
   // }, []);
+
+  useEffect(() => {
+    if (props.location.state) {
+      setError(props.location.state.error);
+    };
+  }, []);
 
   const handleChange = e => {
     setCredentials({
