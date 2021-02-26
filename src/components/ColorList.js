@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import EditMenu from "./EditMenu";
+import AddMenu from "./AddMenu";
 import { axiosWithAuth } from "../helpers/axiosWithAuth";
 
 const initialColor = {
@@ -12,9 +12,16 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  const [adding, setAdding] = useState(false);
+  const [colorToAdd, setColorToAdd] = useState(initialColor);
+
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+  };
+
+  const addColor = () => {
+    setAdding(true);
   };
 
   const saveEdit = e => {
@@ -27,6 +34,18 @@ const ColorList = ({ colors, updateColors }) => {
             return (color.id === res.data.id) ? res.data : color
           })
         );
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
+
+  const saveAdd = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post(`/api/colors`, colorToAdd)
+      .then(res => {
+        updateColors(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -50,6 +69,12 @@ const ColorList = ({ colors, updateColors }) => {
   return (
     <div className="colors-wrap">
       <p>colors</p>
+      <p
+        style={{color:"green", fontStyle:"italic"}}
+        onClick={addColor}
+      >
+        + add a color
+      </p>
       <ul>
         {colors.map(color => (
           <li key={color.id} onClick={() => editColor(color)}>
@@ -71,7 +96,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       { editing && <EditMenu colorToEdit={colorToEdit} saveEdit={saveEdit} setColorToEdit={setColorToEdit} setEditing={setEditing}/> }
-
+      { adding && <AddMenu colorToAdd={colorToAdd} saveAdd={saveAdd} setColorToAdd={setColorToAdd} setAdding={setAdding}/> }
     </div>
   );
 };
