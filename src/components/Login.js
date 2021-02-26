@@ -36,7 +36,7 @@ const Login = (props) => {
     if (props.location.state) {
       setError(props.location.state.error);
     };
-  }, []);
+  }, [props.location.state]);
 
   const handleChange = e => {
     setCredentials({
